@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chain</title>
+    <link rel="stylesheet" href="../css/style.css">
+<!--
+    <script type="text/javascript" src="/scratch-gui/node_modules/@scratch/paper/dist/paper-full.js"></script>
+-->
+    <script type="text/javascript" src="../../dist/paper-full.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+        var circle = new paper.Path.Circle({
+            center: [80, 50],
+            radius: 35,
+            strokeColor: 'red',
+            fillColor: 'red',
+            selectedColor: 'blue',
+            selectedLineWidth: 1    // Set selectedLineWidth
+        });
+
+        circle.strokeWidth = 5;
+        circle.selected = true;
+
+        // 
+
+        var circle2 = new paper.Path.Circle({
+            center: [100, 60],
+            radius: 35,
+            strokeColor: 'green'
+        });
+
+        // console.log(circle.getParent());
+        // circle.bringToFront();
+        circle2.bringToFront();
+
+        var layer2 = new Layer();
+        // layer2.addChild(circle.getParent.children[0]);
+        var layer1 = new Layer();
+        layer1.addChild(circle.getParent().children[1]);
+        layer2.addChild(circle.getParent().children[0]);
+        layer2.sendToBack();
+        // console.log(circle.getParent().remove(circle.getParent().children[1]));
+        // layer2.sendToBack();
+        
+
+    </script>
+</head>
+<body>
+    <canvas id="canvas" resize></canvas>
+</body>
+</html>

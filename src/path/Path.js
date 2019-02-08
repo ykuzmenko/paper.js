@@ -2197,20 +2197,19 @@ new function() { // Scope for drawing
             segment._transformCoordinates(matrix, coords);
             pX = coords[0];
             pY = coords[1];
-            if (selection & /*#=*/SegmentSelection.HANDLE_IN)
+            if (selection & 2 && !this.isFullySelected)
                 drawHandle(2);
-            if (selection & /*#=*/SegmentSelection.HANDLE_OUT)
+            if (selection & 4 && !this.isFullySelected)
                 drawHandle(4);
-            // Draw a rectangle at segment.point:
-            ctx.fillRect(pX - half, pY - half, size, size);
-            // If the point is not selected, draw a white square that is 1 px
-            // smaller on all sides:
-            if (!(selection & /*#=*/SegmentSelection.POINT)) {
-                var fillStyle = ctx.fillStyle;
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(pX - half + 1, pY - half + 1, size - 2, size - 2);
-                ctx.fillStyle = fillStyle;
+            ctx.beginPath();
+            ctx.arc(pX, pY, half, 0, Math.PI * 2, true);
+            ctx.stroke();
+            var fillStyle = ctx.fillStyle;
+            if (!(selection & 1)) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 1)';
             }
+            ctx.fill();
+            ctx.fillStyle = fillStyle;
         }
     }
 
