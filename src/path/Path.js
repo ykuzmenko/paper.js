@@ -2201,12 +2201,31 @@ new function() { // Scope for drawing
                 drawHandle(2);
             if (selection & 4 && !this.isFullySelected)
                 drawHandle(4);
+            var selectedStrokeStyle = segment.getSelectedColor();
             ctx.beginPath();
-            ctx.arc(pX, pY, half, 0, Math.PI * 2, true);
+            if (!(selection & 1)) {
+                ctx.arc(pX, pY, half, 0, Math.PI * 2, true);
+            }
+            if (selection & 1){
+                var radius = half;
+                if (segment.getSelectedRadius()) {
+                    radius = segment.getSelectedRadius();
+                }
+                ctx.arc(pX, pY, radius, 0, Math.PI * 2, true);
+            }
+            var oldStrokeStyle = ctx.strokeStyle;
+            if (selectedStrokeStyle) {
+                ctx.strokeStyle=selectedStrokeStyle;
+            }
             ctx.stroke();
+            ctx.strokeStyle = oldStrokeStyle;
             var fillStyle = ctx.fillStyle;
+            var selectedfillStyle = segment.getSelectedFillStyle();
             if (!(selection & 1)) {
                 ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+            }
+            if ((selection & 1) && selectedfillStyle)  {
+                ctx.fillStyle = selectedfillStyle;
             }
             ctx.fill();
             ctx.fillStyle = fillStyle;

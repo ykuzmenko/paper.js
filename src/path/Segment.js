@@ -686,5 +686,30 @@ var Segment = Base.extend(/** @lends Segment# */{
             }
         }
         return coords;
+    },
+
+    setSelectedRadius: function(radius) {
+        this._selectedRadius = radius;
+    },
+
+    getSelectedRadius: function() {
+        return this._selectedRadius;
+    },
+
+    setSelectedFillStyle: function(fillstyle) {
+        this._selectedFillStyle = fillstyle;
+    },
+
+    getSelectedFillStyle: function() {
+        return this._selectedFillStyle;
+    },
+
+    setSelectedColor: function(color) {
+        this._selectedColor = color;
+
+    },
+
+    getSelectedColor: function() {
+        return this._selectedColor;
     }
 });
