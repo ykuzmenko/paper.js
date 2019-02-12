@@ -2201,32 +2201,57 @@ new function() { // Scope for drawing
                 drawHandle(2);
             if (selection & 4 && !this.isFullySelected)
                 drawHandle(4);
-            var selectedStrokeStyle = segment.getSelectedColor();
+
+            var selectedStrokeStyle;
+
+            if (typeof(segment.getPath().getSelectedSegmentColor) != 'undefined')
+                selectedStrokeStyle = segment.getPath().getSelectedSegmentColor();
+
+            if (typeof(selectedStrokeStyle) == 'object')
+                selectedStrokeStyle = selectedStrokeStyle.toCSS();
+
+            if (segment.getSelectedColor != 'undefined' && segment.getSelectedColor())
+                selectedStrokeStyle = segment.getSelectedColor();
+
             ctx.beginPath();
             if (!(selection & 1)) {
                 ctx.arc(pX, pY, half, 0, Math.PI * 2, true);
             }
             if (selection & 1){
                 var radius = half;
-                if (segment.getSelectedRadius()) {
+                if (typeof(segment.getPath().getSelectedSegmentRadius) != 'undefined')
+                    radius = segment.getPath().getSelectedSegmentRadius();
+
+                if (segment.getSelectedRadius())
                     radius = segment.getSelectedRadius();
-                }
+
                 ctx.arc(pX, pY, radius, 0, Math.PI * 2, true);
             }
+
             var oldStrokeStyle = ctx.strokeStyle;
-            if (selectedStrokeStyle) {
+
+            if ((selection & 1) && selectedStrokeStyle) {
                 ctx.strokeStyle=selectedStrokeStyle;
             }
+
             ctx.stroke();
             ctx.strokeStyle = oldStrokeStyle;
+
             var fillStyle = ctx.fillStyle;
-            var selectedfillStyle = segment.getSelectedFillStyle();
+            var selectedfill = segment.getSelectedFill();
+
             if (!(selection & 1)) {
                 ctx.fillStyle = 'rgba(255, 255, 255, 1)';
             }
-            if ((selection & 1) && selectedfillStyle)  {
-                ctx.fillStyle = selectedfillStyle;
+
+            if ((selection & 1) && typeof(segment.getPath().getSelectedSegmentFill) != 'undefined') {
+                ctx.fillStyle = segment.getPath().getSelectedSegmentFill();
             }
+
+            if ((selection & 1) && selectedfill)  {
+                ctx.fillStyle = selectedfill;
+            }
+
             ctx.fill();
             ctx.fillStyle = fillStyle;
         }

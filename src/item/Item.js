@@ -4474,7 +4474,8 @@ new function() { // Injection scope for hit-test functions shared with project
             ctx.strokeStyle = ctx.fillStyle = color
                     ? color.toCanvasStyle(ctx) : '#009dec';
 
-            ctx.lineWidth = this.getSelectedLineWidth(true);
+            if (typeof(this.getSelectedLineWidth) != 'undefined')
+                ctx.lineWidth = this.getSelectedLineWidth(true);
 
             if (itemSelected)
                 this._drawSelected(ctx, mx, selectionItems);

@@ -15,8 +15,12 @@
             strokeColor: 'red',
             fillColor: 'red',
             selectedColor: 'blue',
-            selectedLineWidth: 1,    // Set selectedLineWidth
-            // selectSegmentRadius: 6,
+
+            // Values may be defined for path
+            selectedLineWidth: 1,
+            selectedSegmentColor: 'black',
+            selectedSegmentRadius: 2,
+            selectedSegmentFill: 'green',
         });
 
         circle.strokeWidth = 5;
@@ -44,16 +48,21 @@
         // layer2.sendToBack();
         
 
-        canvas = document.getElementById('canvas')
+        canvas = document.getElementById('canvas');
 
-        paper.projects[0]._children[0].children[0].segments[3].setSelectedRadius(3);
-        paper.projects[0]._children[0].children[0].segments[1].setSelectedRadius(6);
+        // Values may be defined for each segment
+
+        // paper.projects[0]._children[0].children[0].segments[3].setSelectedRadius(3);
+        // paper.projects[0]._children[0].children[0].segments[1].setSelectedRadius(6);
         paper.projects[0]._children[0].children[0].segments[3].setSelection(SegmentSelection.POINT);
         paper.projects[0]._children[0].children[0].segments[1].setSelection(SegmentSelection.POINT);
-        paper.projects[0]._children[0].children[0].segments[3].setSelectedFillStyle('rgb(255, 0, 255)');
-        paper.projects[0]._children[0].children[0].segments[1].setSelectedFillStyle('rgb(255, 255, 0)');
-        paper.projects[0]._children[0].children[0].segments[3].setSelectedColor('rgb(0, 255, 0)');
-        paper.projects[0]._children[0].children[0].segments[1].setSelectedColor('rgb(128, 128, 128)');
+
+        // paper.projects[0]._children[0].children[0].segments[3].setSelectedFill('rgb(255, 0, 255)');
+        // paper.projects[0]._children[0].children[0].segments[1].setSelectedFill('rgb(255, 255, 0)');
+
+        // paper.projects[0]._children[0].children[0].segments[3].setSelectedColor('purple');
+        // paper.projects[0]._children[0].children[0].segments[1].setSelectedColor('blue');
+        console.log(paper.projects[0]._children[0].children[0].segments[3].isSelected());
     </script>
 </head>
 <body>

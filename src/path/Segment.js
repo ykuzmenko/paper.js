@@ -696,12 +696,12 @@ var Segment = Base.extend(/** @lends Segment# */{
         return this._selectedRadius;
     },
 
-    setSelectedFillStyle: function(fillstyle) {
-        this._selectedFillStyle = fillstyle;
+    setSelectedFill: function(fillstyle) {
+        this._selectedFill = fillstyle;
     },
 
-    getSelectedFillStyle: function() {
-        return this._selectedFillStyle;
+    getSelectedFill: function() {
+        return this._selectedFill;
     },
 
     setSelectedColor: function(color) {
