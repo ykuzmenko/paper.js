@@ -2213,20 +2213,23 @@ new function() { // Scope for drawing
             if (segment.getSelectedColor != 'undefined' && segment.getSelectedColor())
                 selectedStrokeStyle = segment.getSelectedColor();
 
+            var radius = half;
+
             ctx.beginPath();
+
             if (!(selection & 1)) {
-                ctx.arc(pX, pY, half, 0, Math.PI * 2, true);
+                if (typeof(segment.getPath().getSelectedRadius) != 'undefined')
+                    radius = segment.getPath().getSelectedRadius();
             }
             if (selection & 1){
-                var radius = half;
                 if (typeof(segment.getPath().getSelectedSegmentRadius) != 'undefined')
                     radius = segment.getPath().getSelectedSegmentRadius();
 
                 if (segment.getSelectedRadius())
                     radius = segment.getSelectedRadius();
-
-                ctx.arc(pX, pY, radius, 0, Math.PI * 2, true);
             }
+
+            ctx.arc(pX, pY, radius, 0, Math.PI * 2, true);
 
             var oldStrokeStyle = ctx.strokeStyle;
 
@@ -2242,6 +2245,8 @@ new function() { // Scope for drawing
 
             if (!(selection & 1)) {
                 ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+                if (typeof(segment.getPath().getSelectedFill) != 'undefined')
+                    ctx.fillStyle = segment.getPath().getSelectedFill();
             }
 
             if ((selection & 1) && typeof(segment.getPath().getSelectedSegmentFill) != 'undefined') {

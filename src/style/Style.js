@@ -86,7 +86,11 @@ var Style = Base.extend(new function() {
         shadowBlur: 0,
         shadowOffset: new Point(),
         // Selection
+
+        selectedRadius: 2,
         selectedColor: null,
+        selectedFill: 'white',
+
         selectedSegmentColor: 'blue',
         selectedSegmentRadius: 2,
         selectedSegmentFill: 'white'
