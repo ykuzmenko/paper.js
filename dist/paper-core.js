@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Tue Feb 12 16:03:55 2019 +0200
+ * Date: Tue Feb 12 17:30:08 2019 +0200
  *
  ***
  *
@@ -9135,9 +9135,6 @@ new function() {
 				ctx.strokeStyle=selectedStrokeStyle;
 			}
 
-			ctx.stroke();
-			ctx.strokeStyle = oldStrokeStyle;
-
 			var fillStyle = ctx.fillStyle;
 			var selectedfill = segment.getSelectedFill();
 
@@ -9156,6 +9153,8 @@ new function() {
 			}
 
 			ctx.fill();
+			ctx.stroke();
+			ctx.strokeStyle = oldStrokeStyle;
 			ctx.fillStyle = fillStyle;
 		}
 	}
@@ -12067,6 +12066,7 @@ var Style = Base.extend(new function() {
 		shadowBlur: 0,
 		shadowOffset: new Point(),
 
+		selectedLineWidth: 1,
 		selectedRadius: 2,
 		selectedColor: null,
 		selectedFill: 'white',

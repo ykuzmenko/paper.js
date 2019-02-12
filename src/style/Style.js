@@ -87,6 +87,7 @@ var Style = Base.extend(new function() {
         shadowOffset: new Point(),
         // Selection
 
+        selectedLineWidth: 1,
         selectedRadius: 2,
         selectedColor: null,
         selectedFill: 'white',

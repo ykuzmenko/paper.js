@@ -2237,9 +2237,6 @@ new function() { // Scope for drawing
                 ctx.strokeStyle=selectedStrokeStyle;
             }
 
-            ctx.stroke();
-            ctx.strokeStyle = oldStrokeStyle;
-
             var fillStyle = ctx.fillStyle;
             var selectedfill = segment.getSelectedFill();
 
@@ -2258,6 +2255,8 @@ new function() { // Scope for drawing
             }
 
             ctx.fill();
+            ctx.stroke();
+            ctx.strokeStyle = oldStrokeStyle;
             ctx.fillStyle = fillStyle;
         }
     }
