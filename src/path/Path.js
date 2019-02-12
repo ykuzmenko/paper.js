@@ -2254,6 +2254,9 @@ new function() { // Scope for drawing
                 ctx.fillStyle = selectedfill;
             }
 
+            if (typeof(ctx.fillStyle) == 'object')
+                ctx.fillStyle = ctx.fillStyle.toCSS();
+
             ctx.fill();
             ctx.stroke();
             ctx.strokeStyle = oldStrokeStyle;

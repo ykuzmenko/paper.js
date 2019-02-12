@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Tue Feb 12 17:30:08 2019 +0200
+ * Date: Tue Feb 12 18:23:53 2019 +0200
  *
  ***
  *
@@ -9154,6 +9154,9 @@ new function() {
 			if ((selection & 1) && selectedfill)  {
 				ctx.fillStyle = selectedfill;
 			}
+
+			if (typeof(ctx.fillStyle) == 'object')
+				ctx.fillStyle = ctx.fillStyle.toCSS();
 
 			ctx.fill();
 			ctx.stroke();
