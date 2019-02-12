@@ -2,7 +2,7 @@
  * Paper.js - The Swiss Army Knife of Vector Graphics Scripting.
  * http://paperjs.org/
  *
- * Copyright (c) 2011 - 2016, Juerg Lehni & Jonathan Puckey
+ * Copyright (c) 2011 - 2019, Juerg Lehni & Jonathan Puckey
  * http://scratchdisk.com/ & https://puckey.studio/
  *
  * Distributed under the MIT license. See LICENSE file for details.
@@ -86,7 +86,14 @@ var Style = Base.extend(new function() {
         shadowBlur: 0,
         shadowOffset: new Point(),
         // Selection
-        selectedColor: null
+
+        selectedRadius: 2,
+        selectedColor: null,
+        selectedFill: 'white',
+
+        selectedSegmentColor: 'blue',
+        selectedSegmentRadius: 2,
+        selectedSegmentFill: 'white'
     },
     // Defaults for Group, Layer and Project (anything item that allows nesting
     // needs to be able to pass down text styles as well):

@@ -2,7 +2,7 @@
  * Paper.js - The Swiss Army Knife of Vector Graphics Scripting.
  * http://paperjs.org/
  *
- * Copyright (c) 2011 - 2016, Juerg Lehni & Jonathan Puckey
+ * Copyright (c) 2011 - 2019, Juerg Lehni & Jonathan Puckey
  * http://scratchdisk.com/ & https://puckey.studio/
  *
  * Distributed under the MIT license. See LICENSE file for details.
@@ -686,5 +686,30 @@ var Segment = Base.extend(/** @lends Segment# */{
             }
         }
         return coords;
+    },
+
+    setSelectedRadius: function(radius) {
+        this._selectedRadius = radius;
+    },
+
+    getSelectedRadius: function() {
+        return this._selectedRadius;
+    },
+
+    setSelectedFill: function(fillstyle) {
+        this._selectedFill = fillstyle;
+    },
+
+    getSelectedFill: function() {
+        return this._selectedFill;
+    },
+
+    setSelectedColor: function(color) {
+        this._selectedColor = color;
+
+    },
+
+    getSelectedColor: function() {
+        return this._selectedColor;
     }
 });

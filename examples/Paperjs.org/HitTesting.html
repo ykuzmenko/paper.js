@@ -83,8 +83,10 @@
 
         function onMouseMove(event) {
             project.activeLayer.selected = false;
-            if (event.item)
+            if (event.item) {
                 event.item.selected = true;
+                event.item.selectedLineWidth = 1;
+            }
         }
 
         function onMouseDrag(event) {

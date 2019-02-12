@@ -2,7 +2,7 @@
  * Paper.js - The Swiss Army Knife of Vector Graphics Scripting.
  * http://paperjs.org/
  *
- * Copyright (c) 2011 - 2016, Juerg Lehni & Jonathan Puckey
+ * Copyright (c) 2011 - 2019, Juerg Lehni & Jonathan Puckey
  * http://scratchdisk.com/ & https://puckey.studio/
  *
  * Distributed under the MIT license. See LICENSE file for details.
@@ -4473,8 +4473,13 @@ new function() { // Injection scope for hit-test functions shared with project
                 half = size / 2;
             ctx.strokeStyle = ctx.fillStyle = color
                     ? color.toCanvasStyle(ctx) : '#009dec';
+
+            if (typeof(this.getSelectedLineWidth) != 'undefined')
+                ctx.lineWidth = this.getSelectedLineWidth(true);
+
             if (itemSelected)
                 this._drawSelected(ctx, mx, selectionItems);
+
             if (positionSelected) {
                 // Convert position from the parent's coordinates system to the
                 // global one:

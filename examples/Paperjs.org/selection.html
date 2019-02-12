@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chain</title>
+    <link rel="stylesheet" href="../css/style.css">
+<!--
+    <script type="text/javascript" src="/scratch-gui/node_modules/@scratch/paper/dist/paper-full.js"></script>
+-->
+    <script type="text/javascript" src="../../dist/paper-full.js"></script>
+    <script type="text/paperscript" canvas="canvas">
+        var circle = new paper.Path.Circle({
+            center: [80, 50],
+            radius: 35,
+            strokeColor: 'red',
+            fillColor: 'red',
+            selectedColor: 'blue',
+
+            // Values may be defined for path
+            selectedLineWidth: 1,
+            selectedRadius : 2,
+            selectedFill: 'yellow',
+
+            selectedSegmentColor: 'black',
+            selectedSegmentRadius: 1,
+            selectedSegmentFill: 'green',
+        });
+
+        circle.strokeWidth = 5;
+        circle.selected = true;
+
+        // 
+
+        var circle2 = new paper.Path.Circle({
+            center: [100, 60],
+            radius: 35,
+            strokeColor: 'green'
+        });
+
+        // console.log(circle.getParent());
+        // circle.bringToFront();
+        circle2.bringToFront();
+
+        var layer2 = new Layer();
+        // layer2.addChild(circle.getParent.children[0]);
+        var layer1 = new Layer();
+        layer1.addChild(circle.getParent().children[1]);
+        layer2.addChild(circle.getParent().children[0]);
+        layer2.sendToBack();
+        // console.log(circle.getParent().remove(circle.getParent().children[1]));
+        // layer2.sendToBack();
+        
+
+        canvas = document.getElementById('canvas');
+
+        // Values may be defined for each segment
+
+        // paper.projects[0]._children[0].children[0].segments[3].setSelectedRadius(3);
+        // paper.projects[0]._children[0].children[0].segments[1].setSelectedRadius(6);
+        paper.projects[0]._children[0].children[0].segments[3].setSelection(SegmentSelection.POINT);
+        paper.projects[0]._children[0].children[0].segments[1].setSelection(SegmentSelection.POINT);
+
+        // paper.projects[0]._children[0].children[0].segments[3].setSelectedFill('rgb(255, 0, 255)');
+        // paper.projects[0]._children[0].children[0].segments[1].setSelectedFill('rgb(255, 255, 0)');
+
+        // paper.projects[0]._children[0].children[0].segments[3].setSelectedColor('purple');
+        // paper.projects[0]._children[0].children[0].segments[1].setSelectedColor('blue');
+        // console.log(paper.projects[0]._children[0].children[0].segments[3].isSelected());
+    </script>
+</head>
+<body>
+    <canvas id="canvas" resize></canvas>
+</body>
+</html>

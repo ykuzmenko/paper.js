@@ -2,7 +2,7 @@
  * Paper.js - The Swiss Army Knife of Vector Graphics Scripting.
  * http://paperjs.org/
  *
- * Copyright (c) 2011 - 2016, Juerg Lehni & Jonathan Puckey
+ * Copyright (c) 2011 - 2019, Juerg Lehni & Jonathan Puckey
  * http://scratchdisk.com/ & https://puckey.studio/
  *
  * Distributed under the MIT license. See LICENSE file for details.
@@ -2197,20 +2197,68 @@ new function() { // Scope for drawing
             segment._transformCoordinates(matrix, coords);
             pX = coords[0];
             pY = coords[1];
-            if (selection & /*#=*/SegmentSelection.HANDLE_IN)
+            if (selection & 2 && !this.isFullySelected)
                 drawHandle(2);
-            if (selection & /*#=*/SegmentSelection.HANDLE_OUT)
+            if (selection & 4 && !this.isFullySelected)
                 drawHandle(4);
-            // Draw a rectangle at segment.point:
-            ctx.fillRect(pX - half, pY - half, size, size);
-            // If the point is not selected, draw a white square that is 1 px
-            // smaller on all sides:
-            if (!(selection & /*#=*/SegmentSelection.POINT)) {
-                var fillStyle = ctx.fillStyle;
-                ctx.fillStyle = '#ffffff';
-                ctx.fillRect(pX - half + 1, pY - half + 1, size - 2, size - 2);
-                ctx.fillStyle = fillStyle;
+
+            var selectedStrokeStyle;
+
+            if (typeof(segment.getPath().getSelectedSegmentColor) != 'undefined')
+                selectedStrokeStyle = segment.getPath().getSelectedSegmentColor();
+
+            if (typeof(selectedStrokeStyle) == 'object')
+                selectedStrokeStyle = selectedStrokeStyle.toCSS();
+
+            if (segment.getSelectedColor != 'undefined' && segment.getSelectedColor())
+                selectedStrokeStyle = segment.getSelectedColor();
+
+            var radius = half;
+
+            ctx.beginPath();
+
+            if (!(selection & 1)) {
+                if (typeof(segment.getPath().getSelectedRadius) != 'undefined')
+                    radius = segment.getPath().getSelectedRadius();
             }
+            if (selection & 1){
+                if (typeof(segment.getPath().getSelectedSegmentRadius) != 'undefined')
+                    radius = segment.getPath().getSelectedSegmentRadius();
+
+                if (segment.getSelectedRadius())
+                    radius = segment.getSelectedRadius();
+            }
+
+            ctx.arc(pX, pY, radius, 0, Math.PI * 2, true);
+
+            var oldStrokeStyle = ctx.strokeStyle;
+
+            if ((selection & 1) && selectedStrokeStyle) {
+                ctx.strokeStyle=selectedStrokeStyle;
+            }
+
+            ctx.stroke();
+            ctx.strokeStyle = oldStrokeStyle;
+
+            var fillStyle = ctx.fillStyle;
+            var selectedfill = segment.getSelectedFill();
+
+            if (!(selection & 1)) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+                if (typeof(segment.getPath().getSelectedFill) != 'undefined')
+                    ctx.fillStyle = segment.getPath().getSelectedFill();
+            }
+
+            if ((selection & 1) && typeof(segment.getPath().getSelectedSegmentFill) != 'undefined') {
+                ctx.fillStyle = segment.getPath().getSelectedSegmentFill();
+            }
+
+            if ((selection & 1) && selectedfill)  {
+                ctx.fillStyle = selectedfill;
+            }
+
+            ctx.fill();
+            ctx.fillStyle = fillStyle;
         }
     }
 
