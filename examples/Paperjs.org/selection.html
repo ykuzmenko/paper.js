@@ -4,26 +4,23 @@
     <meta charset="UTF-8">
     <title>Chain</title>
     <link rel="stylesheet" href="../css/style.css">
-<!--
-    <script type="text/javascript" src="../../dist/paper-full.js"></script>
--->
     <script type="text/javascript" src="../../dist/paper-full.js"></script>
     <script type="text/paperscript" canvas="canvas">
         var circle = new paper.Path.Circle({
             center: [80, 50],
             radius: 35,
-            strokeColor: 'red',
-            fillColor: 'red',
-            selectedColor: 'blue',
+            strokeColor: new paper.Color(255,0,0,1),
+            fillColor: new paper.Color(255,0,0,1),
+            selectedColor: new paper.Color(0,0,255,1),
 
             // Values may be defined for path
             selectedLineWidth: 1,
             selectedRadius : 2,
-            selectedFill: 'yellow',
+            selectedFill: new paper.Color(255,255,0,1),
 
-            selectedSegmentColor: 'black',
-            selectedSegmentRadius: 1,
-            selectedSegmentFill: 'green',
+            selectedSegmentColor: new paper.Color(0,0,0,1),
+            selectedSegmentRadius: 3,
+            selectedSegmentFill: new paper.Color(255,255,255,1),
         });
 
         circle.strokeWidth = 5;

@@ -9,7 +9,7 @@
  *
  * All rights reserved.
  *
- * Date: Tue Feb 12 18:23:53 2019 +0200
+ * Date: Tue Feb 12 18:50:14 2019 +0200
  *
  ***
  *
@@ -9105,9 +9105,6 @@ new function() {
 			if (typeof(segment.getPath().getSelectedSegmentColor) != 'undefined')
 				selectedStrokeStyle = segment.getPath().getSelectedSegmentColor();
 
-			if (typeof(selectedStrokeStyle) == 'object')
-				selectedStrokeStyle = selectedStrokeStyle.toCSS();
-
 			if (segment.getSelectedColor != 'undefined' && segment.getSelectedColor())
 				selectedStrokeStyle = segment.getSelectedColor();
 
@@ -9132,33 +9129,39 @@ new function() {
 			var oldStrokeStyle = ctx.strokeStyle;
 
 			if ((selection & 1) && selectedStrokeStyle) {
+				if (typeof(selectedStrokeStyle) == "object")
+					selectedStrokeStyle = selectedStrokeStyle.toCSS();
 				ctx.strokeStyle=selectedStrokeStyle;
 			}
 
-			var fillStyle = ctx.fillStyle;
+			var oldFillStyle = ctx.fillStyle;
+			var fillStyle;
+
 			var selectedfill = segment.getSelectedFill();
 
 			if (!(selection & 1)) {
-				ctx.fillStyle = 'rgba(255, 255, 255, 1)';
+				fillStyle = 'rgba(255, 255, 255, 1)';
 				if (typeof(segment.getPath().getSelectedFill) != 'undefined')
-					ctx.fillStyle = segment.getPath().getSelectedFill();
+					fillStyle = segment.getPath().getSelectedFill();
 			}
 
 			if ((selection & 1) && typeof(segment.getPath().getSelectedSegmentFill) != 'undefined') {
-				ctx.fillStyle = segment.getPath().getSelectedSegmentFill();
+				fillStyle = segment.getPath().getSelectedSegmentFill();
 			}
 
 			if ((selection & 1) && selectedfill)  {
-				ctx.fillStyle = selectedfill;
+				fillStyle = selectedfill;
 			}
 
-			if (typeof(ctx.fillStyle) == 'object')
-				ctx.fillStyle = ctx.fillStyle.toCSS();
+			if (typeof(fillStyle) == 'object')
+				fillStyle = fillStyle.toCSS();
+
+			ctx.fillStyle = fillStyle;
 
 			ctx.fill();
 			ctx.stroke();
 			ctx.strokeStyle = oldStrokeStyle;
-			ctx.fillStyle = fillStyle;
+			ctx.fillStyle = oldFillStyle;
 		}
 	}
 
